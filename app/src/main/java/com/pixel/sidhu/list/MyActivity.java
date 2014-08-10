@@ -74,16 +74,17 @@ public class MyActivity
                 Toast.makeText((Context)(MyActivity.this.getApplicationContext()), (CharSequence)("Your details has been added to list!"), (int)(0)).show();
             }
         }));
-        this.nametxt.addTextChangedListener((TextWatcher)(new TextWatcher(){
-
+        
+        nametxt.addTextChangedListener(new TextWatcher(){
+        
             public void afterTextChanged(Editable editable) {
             }
 
-            public void beforeTextChanged(CharSequence charSequence2, int charSequence22, int charSequence222, int charSequence2222) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             }
 
 
-            public void onTextChanged(CharSequence charSequence2, int charSequence22, int charSequence222, int charSequence2222) {
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 Button button = button;
                 boolean bl = !(MyActivity.this.nametxt.getText().toString().trim().isEmpty());
                 button.setEnabled(bl);
