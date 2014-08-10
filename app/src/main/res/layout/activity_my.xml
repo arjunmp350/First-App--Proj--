@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TabHost
+        android:layout_gravity="center_horizontal"
+        android:id="@id/tabHost"
+        android:focusable="false"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@id/tabcreator"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <EditText
+                        android:id="@id/txtname"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:hint="Name " android:ems="10"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@id/txtdob"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:hint="Date of Birth"
+                        android:ems="10" android:inputType="date" />
+
+                    <EditText
+                        android:id="@id/txtclass"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:hint="Class" android:ems="10"
+                        android:inputType="numberDecimal" />
+
+                    <EditText
+                        android:id="@id/txtmarks"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:hint="Total Marks"
+                        android:ems="10"
+                        android:inputType="numberDecimal" />
+
+                    <Button
+                        android:enabled="false"
+                        android:layout_gravity="center"
+                        android:id="@+id/btnadd"
+                        android:layout_width="197.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:text="Create" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@id/tablist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip" />
+
+                    <ListView
+                        android:layout_gravity="center_horizontal"
+                        android:id="@id/listView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@id/tababtus"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="#b79c9c9c" android:id="@id/textView2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="About Us" />
+
+                    <TextView
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#b79c9c9c"
+                        android:id="@id/textView3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:text="PIXEL Inc" />
+
+                    <TextView
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#b79c9c9c"
+                        android:id="@id/textView4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BUILD 1 [20140802]" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </TabHost>
+
+</LinearLayout>
