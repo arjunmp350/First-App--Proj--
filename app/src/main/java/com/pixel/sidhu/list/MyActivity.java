@@ -26,28 +26,23 @@ import java.util.List;
 
 public class MyActivity extends Activity {
 
-    List<Details> Details = new ArrayList();
-    ListView DetailslistView;
-    EditText classtxt;
-    EditText dobtxt;
-    EditText markstxt;
-    EditText nametxt;
 
-    public void (String string,String string2, String string3, String string4) {
-        this.Details.add(new Details(string, string2, string3, string4));
-    }
+    EditText nametxt,dobtxt, classtxt,markstxt;
+    List<Details> Details = new ArrayList<Details>();
+    ListView detailsListView;
+
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        setContentView(MyActivity);
+        setContentView(R.layout.activity_my);
 
         nametxt = (EditText)(findViewById(R.id.textstud_name));
         dobtxt = (EditText)(findViewById(R.id.textdob));
         classtxt = (EditText)(findViewById(R.id.textClass));
         markstxt = (EditText)(findViewById(R.id.textmarks));
-        DetailslistView = (ListView)(findViewById(R.id.listView));
+        detailsListView = (ListView)findViewById(R.id.listView);
         TabHost tabHost = (TabHost)(findViewById(R.id.tabHost));
 
         tabHost.setup();
@@ -68,67 +63,68 @@ public class MyActivity extends Activity {
         tabHost.addTab(tabSpec);
 
         final Button button = (Button)(findViewById(R.id.btnadd));
-                @Override
-                public void onClick(View View) {
 
+        button.setOnClickListener(new View.OnClickListener(); {             //error.
+            addDetail(nametxt.getText().toString(), dobtxt.getText().toString(), classtxt.getText().toString(), markstxt.getText().toString());
+            populatelist();
+            Toast.makeText(getApplicationContext(), nametxt.getText().toString() + "Your details has been added to list!", Toast.LENGTH_SHORT).show();
 
-        button.setOnClickListener(new View.OnClickListener(){                           //(error) will be looked up later.
-                MyActivity.this.addDetails(MyActivity.this.nametxt.getText().toString(), MyActivity.this.dobtxt.getText().toString(), MyActivity.this.classtxt.getText().toString(), MyActivity.this.markstxt.getText().toString());
-                MyActivity.this.populatelist();
-                Toast.makeText((Context)(MyActivity.this.getApplicationContext()), (CharSequence)("Your details has been added to list!"), (int)(0)).show();
-            }
-        }));
+            };
         
-        nametxt.addTextChangedListener(new TextWatcher(){
-        
-            public void afterTextChanged(Editable editable) {
-            }
+        nametxt.addTextChangedListener(new TextWatcher() {
 
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             }
 
-
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                Button button = button;
                 boolean bl = !(MyActivity.this.nametxt.getText().toString().trim().isEmpty());
                 button.setEnabled(bl);
             }
-        }));
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.getMenuInflater().inflate(2131165184, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() != 2131230738) return super.onOptionsItemSelected(menuItem);
-        return true;
-    }
 
     public void populatelist() {
-        DetailslistAdapter detailslistAdapter = new DetailslistAdapter();
-        this.DetailslistView.setAdapter(detailslistAdapter);
+        ArrayAdapter<Details> adapter = new detailslistAdapter();
+        detailsListView.setAdapter(adapter);
     }
 
-    public class DetailslistAdapter
-            extends ArrayAdapter<Details> {
-        public DetailslistAdapter() {
-            super(MyActivity.this, DetailslistAdapter, MyActivity.this.Details);
-        }
-
-        public View getView(int n, View view, ViewGroup viewGroup) {
-            if (view == null) {
-                view = MyActivity.this.getLayoutInflater().inflate(DetailslistView, viewGroup, false);
-            }
-            Details details = (MyActivity.this.Details.get(n));
-            (TextView)(view.findViewById(R.id.textView)).setText.details.getName();
-            (TextView)(view.findViewById(R.id.textView)).setText.details.getDob();
-            (TextView)(view.findViewById(R.id.textView)).setText.details.getClas();
-            (TextView)(view.findViewById(R.id.textView)).setText.details.getMarks();
-            return view;
-        }
+    private  void addDetail (String name, String dob, String clas , String marks){
+        Details.add(new Details(name,dob,clas,marks));
     }
+
+   private class detailslistAdapter extends  ArrayAdapter<Details> {
+       public detailslistAdapter() {
+           super(MyActivity.this, R.layout.listview_item, Details);
+       }
+
+       @Override
+       public View getView(int position, View view, ViewGroup viewGroup) {
+           if (view == null)
+               view = getLayoutInflater().inflate(R.layout.listview_item, viewGroup, false);
+
+           Details currentdetails = (MyActivity.this.Details.get(position));
+
+           TextView name = (TextView) (view.findViewById(R.id.textstud_name));
+           name.setText(currentdetails.getName());
+           TextView dob = (TextView) (view.findViewById(R.id.textdob));
+           dob.setText(currentdetails.getDob());
+           TextView clas = (TextView) (view.findViewById(R.id.textClass));
+           clas.setText(currentdetails.getClas());
+           TextView marks = (TextView) (view.findViewById(R.id.textmarks));
+           marks.setText(currentdetails.getMarks());
+
+           return view;
+
+       }
+
+   }
 
 }
 
