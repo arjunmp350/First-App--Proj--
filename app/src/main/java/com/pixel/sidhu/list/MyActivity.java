@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ import java.util.List;
 public class MyActivity extends Activity {
 
 
-    EditText nametxt,dobtxt, classtxt,markstxt;
+    EditText nametxt, dobtxt, classtxt, markstxt;
     List<Details> Details = new ArrayList<Details>();
     ListView detailsListView;
 
@@ -38,12 +39,12 @@ public class MyActivity extends Activity {
 
         setContentView(R.layout.activity_my);
 
-        nametxt = (EditText)(findViewById(R.id.textstud_name));
-        dobtxt = (EditText)(findViewById(R.id.textdob));
-        classtxt = (EditText)(findViewById(R.id.textClass));
-        markstxt = (EditText)(findViewById(R.id.textmarks));
-        detailsListView = (ListView)findViewById(R.id.listView);
-        TabHost tabHost = (TabHost)(findViewById(R.id.tabHost));
+        nametxt = (EditText) (findViewById(R.id.textstud_name));
+        dobtxt = (EditText) (findViewById(R.id.textdob));
+        classtxt = (EditText) (findViewById(R.id.textClass));
+        markstxt = (EditText) (findViewById(R.id.textmarks));
+        detailsListView = (ListView) findViewById(R.id.listView);
+        TabHost tabHost = (TabHost) (findViewById(R.id.tabHost));
 
         tabHost.setup();
 
@@ -62,15 +63,17 @@ public class MyActivity extends Activity {
         tabSpec.setIndicator("About us");
         tabHost.addTab(tabSpec);
 
-        final Button button = (Button)(findViewById(R.id.btnadd));
+        final Button button = (Button) findViewById(R.id.btnadd);
 
-        button.setOnClickListener(new View.OnClickListener(); {             //error.
-            addDetail(nametxt.getText().toString(), dobtxt.getText().toString(), classtxt.getText().toString(), markstxt.getText().toString());
-            populatelist();
-            Toast.makeText(getApplicationContext(), nametxt.getText().toString() + "Your details has been added to list!", Toast.LENGTH_SHORT).show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addDetail(nametxt.getText().toString(), dobtxt.getText().toString(), classtxt.getText().toString(), markstxt.getText().toString());
+                populatelist();
+                Toast.makeText(getApplicationContext(), nametxt.getText().toString() + "Your details has been added to list!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            };
-        
         nametxt.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -90,41 +93,48 @@ public class MyActivity extends Activity {
     }
 
 
+
     public void populatelist() {
         ArrayAdapter<Details> adapter = new detailslistAdapter();
         detailsListView.setAdapter(adapter);
     }
 
-    private  void addDetail (String name, String dob, String clas , String marks){
-        Details.add(new Details(name,dob,clas,marks));
+    private void addDetail(String name, String dob, String clas, String marks) {
+        Details.add(new Details(name, dob, clas, marks));
     }
 
-   private class detailslistAdapter extends  ArrayAdapter<Details> {
-       public detailslistAdapter() {
-           super(MyActivity.this, R.layout.listview_item, Details);
-       }
+    private class detailslistAdapter extends ArrayAdapter<Details> {
+        public detailslistAdapter() {
+            super(MyActivity.this, R.layout.listview_item, Details);
+        }
 
-       @Override
-       public View getView(int position, View view, ViewGroup viewGroup) {
-           if (view == null)
-               view = getLayoutInflater().inflate(R.layout.listview_item, viewGroup, false);
+        @Override
+        public View getView(int position, View view, ViewGroup viewGroup) {
+            if (view == null)
+                view = getLayoutInflater().inflate(R.layout.listview_item, viewGroup, false);
 
-           Details currentdetails = (MyActivity.this.Details.get(position));
+            Details currentdetails = (MyActivity.this.Details.get(position));
 
-           TextView name = (TextView) (view.findViewById(R.id.textstud_name));
-           name.setText(currentdetails.getName());
-           TextView dob = (TextView) (view.findViewById(R.id.textdob));
-           dob.setText(currentdetails.getDob());
-           TextView clas = (TextView) (view.findViewById(R.id.textClass));
-           clas.setText(currentdetails.getClas());
-           TextView marks = (TextView) (view.findViewById(R.id.textmarks));
-           marks.setText(currentdetails.getMarks());
+            TextView name = (TextView) (view.findViewById(R.id.textstud_name));
+            name.setText(currentdetails.getName());
+            TextView dob = (TextView) (view.findViewById(R.id.textdob));
+            dob.setText(currentdetails.getDob());
+            TextView clas = (TextView) (view.findViewById(R.id.textClass));
+            clas.setText(currentdetails.getClas());
+            TextView marks = (TextView) (view.findViewById(R.id.textmarks));
+            marks.setText(currentdetails.getMarks());
 
-           return view;
+            return view;
 
-       }
+        }
 
-   }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.my, menu);
+        return true;
+    }
 
 }
 
